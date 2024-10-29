@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm3qj8rnmobj4"]
+
+[ext_resource type="Texture2D" uid="uid://5pk0jakchkgo" path="res://Assets/Particles/collision_particle.png" id="1_wilv3"]
+
+[sub_resource type="Curve" id="Curve_5c5w4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.116466, 0), 0.0, 0.0, 0, 0, Vector2(0.156627, 1), 0.0, 0.0, 0, 0, Vector2(0.654618, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_qht4b"]
+curve = SubResource("Curve_5c5w4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gatt7"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 36.522
+initial_velocity_min = 40.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.09
+scale_max = 0.18
+alpha_curve = SubResource("CurveTexture_qht4b")
+
+[node name="BulletImpactParticle" type="GPUParticles2D"]
+modulate = Color(1.2, 1.2, 1.2, 1)
+texture_filter = 1
+emitting = false
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_gatt7")
+texture = ExtResource("1_wilv3")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 0.39

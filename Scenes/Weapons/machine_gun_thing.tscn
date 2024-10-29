@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=3 uid="uid://bollejjsex4l5"]
+
+[ext_resource type="Script" path="res://Scripts/gun.gd" id="1_e8518"]
+[ext_resource type="PackedScene" uid="uid://bmifu2u6hcbw8" path="res://Scenes/Bullets/machine_gun_bullet.tscn" id="2_g7lhb"]
+[ext_resource type="Texture2D" uid="uid://csoc52wqimlf5" path="res://Assets/Guns/12.png" id="3_lc36y"]
+
+[sub_resource type="Animation" id="Animation_6t8k2"]
+resource_name = "Enter"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.46713, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3wjap"]
+resource_name = "Exit"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.46713]
+}
+
+[sub_resource type="Animation" id="Animation_f0k1d"]
+resource_name = "Fire"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-2, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ludfl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4js5o"]
+_data = {
+"Enter": SubResource("Animation_6t8k2"),
+"Exit": SubResource("Animation_3wjap"),
+"Fire": SubResource("Animation_f0k1d"),
+"RESET": SubResource("Animation_ludfl")
+}
+
+[node name="MachineGunThing" type="Node2D" node_paths=PackedStringArray("barrel_pos")]
+texture_filter = 3
+script = ExtResource("1_e8518")
+maximum_ammo = 30
+firerate = 10.0
+accuracy = 9.0
+arc = 10.0
+bullet_speed = 6.0
+bullet = ExtResource("2_g7lhb")
+barrel_pos = NodePath("Body/Barrel")
+gun_name = "Machine Gun Thing"
+_rarity = 3
+base_damage = 5.0
+camera_shake_strength = 4.0
+knockback_strength = 2.0
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="BodySprite" type="Sprite2D" parent="Body"]
+unique_name_in_owner = true
+position = Vector2(5, -1)
+scale = Vector2(0.439394, 0.394737)
+texture = ExtResource("3_lc36y")
+
+[node name="Barrel" type="Node2D" parent="Body"]
+position = Vector2(12, -3)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_4js5o")
+}

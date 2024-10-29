@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://b7edkpdtfkbrn"]
+
+[ext_resource type="PackedScene" uid="uid://bqdc3lut2tijo" path="res://Scenes/Pickups/pickup.tscn" id="1_cbq0q"]
+[ext_resource type="Texture2D" uid="uid://cobqiqkiueomf" path="res://Assets/Guns/Bullets/All_Fire_Bullet_Pixel_16x16_02.png" id="2_2j8wl"]
+[ext_resource type="Script" path="res://Scenes/Pickups/WeaponPowerups/WeaponPowerup.gd" id="2_mi7ta"]
+
+[sub_resource type="Animation" id="Animation_v2ca4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hyi8o"]
+resource_name = "default"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vr3jg"]
+_data = {
+"RESET": SubResource("Animation_v2ca4"),
+"default": SubResource("Animation_hyi8o")
+}
+
+[node name="WeaponPowerup" instance=ExtResource("1_cbq0q")]
+script = ExtResource("2_mi7ta")
+property_to_modify = ""
+value = 0.0
+operation = null
+
+[node name="Sprite2D" parent="." index="0"]
+texture_filter = 1
+scale = Vector2(0.75, 0.714286)
+texture = ExtResource("2_2j8wl")
+hframes = 5
+region_enabled = true
+region_rect = Rect2(0, 18, 80, 14)
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_vr3jg")
+}
+autoplay = "default"

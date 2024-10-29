@@ -1,0 +1,528 @@
+[gd_scene load_steps=37 format=3 uid="uid://cy07xwytxk18q"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_baxxc"]
+[ext_resource type="Texture2D" uid="uid://buqpiwh77v7hp" path="res://Assets/Player/AnimationSheet.png" id="1_ktcyp"]
+[ext_resource type="Script" path="res://Scripts/InventoryManager.gd" id="2_jxdgr"]
+[ext_resource type="PackedScene" uid="uid://bollejjsex4l5" path="res://Scenes/Guns/machine_gun_thing.tscn" id="3_cxgwl"]
+[ext_resource type="PackedScene" uid="uid://c3hawnpkseav4" path="res://Scenes/Guns/sniper_thing.tscn" id="3_tka1p"]
+[ext_resource type="PackedScene" uid="uid://d2slkfh2pue4g" path="res://Scenes/Powerups/item_pickup.tscn" id="5_gi6qa"]
+[ext_resource type="Script" path="res://Scripts/PlayerHUD.gd" id="7_ojxgc"]
+[ext_resource type="Script" path="res://Scripts/health_bar.gd" id="8_mt7s2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xksl"]
+size = Vector2(8, 5)
+
+[sub_resource type="Animation" id="Animation_2h478"]
+resource_name = "Idle_left"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2.5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DropPosition:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_wegdg"]
+resource_name = "Idle_right"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2.5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DropPosition:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_0pnaa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DropPosition:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_lilw7"]
+resource_name = "Walk_left"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DropPosition:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-12, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_l0f5a"]
+resource_name = "Walk_right"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DropPosition:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(12, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4gcg"]
+_data = {
+"Idle_left": SubResource("Animation_2h478"),
+"Idle_right": SubResource("Animation_wegdg"),
+"RESET": SubResource("Animation_0pnaa"),
+"Walk_left": SubResource("Animation_lilw7"),
+"Walk_right": SubResource("Animation_l0f5a")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ujrd2"]
+animation = &"Idle_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_golpv"]
+animation = &"Idle_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_06j10"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ujrd2")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_golpv")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7iqan"]
+animation = &"Walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_71wyt"]
+animation = &"Walk_right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_hsa0p"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_7iqan")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_71wyt")
+blend_point_1/pos = 1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qms86"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_osbh7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_480xd"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_dnf5m"]
+states/Idle/node = SubResource("AnimationNodeBlendSpace1D_06j10")
+states/Idle/position = Vector2(443, 100)
+states/Start/position = Vector2(206, 100)
+states/Walk/node = SubResource("AnimationNodeBlendSpace1D_hsa0p")
+states/Walk/position = Vector2(635, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qms86"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_osbh7"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_480xd")]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_svpa0"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqgi1"]
+size = Vector2(10, 17)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5pn0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m4qir"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_do28b"]
+bg_color = Color(0.395707, 0.666039, 0.547338, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x06tj"]
+bg_color = Color(0.136826, 0.136826, 0.136826, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dt3xa"]
+bg_color = Color(0.960351, 0.960351, 0.960351, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c8646"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4l3qw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqegf"]
+bg_color = Color(0.168627, 0.6, 0.6, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_88pas"]
+font_size = 12
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+z_index = 5
+collision_layer = 4
+script = ExtResource("1_baxxc")
+max_energy_shield = 30.0
+
+[node name="InventoryManager" type="Node" parent="." node_paths=PackedStringArray("gun_parent")]
+script = ExtResource("2_jxdgr")
+weapon_slots = Array[PackedScene]([ExtResource("3_tka1p"), ExtResource("3_cxgwl")])
+base_pickup_scene = ExtResource("5_gi6qa")
+gun_parent = NodePath("../Pivot/Gun")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+texture = ExtResource("1_ktcyp")
+hframes = 8
+vframes = 6
+
+[node name="EnvironmentCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8.5)
+shape = SubResource("RectangleShape2D_1xksl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n4gcg")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_dnf5m")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Idle/blend_position = 0.0
+parameters/Walk/blend_position = -0.00202841
+
+[node name="Pivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 5)
+
+[node name="Gun" type="Node2D" parent="Pivot"]
+unique_name_in_owner = true
+position = Vector2(8, 0)
+
+[node name="DropPosition" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-12, 4)
+
+[node name="ActionableFinder" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionableFinder"]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_svpa0")
+debug_color = Color(0.881962, 0.309901, 0.351877, 0)
+
+[node name="EnemyDetectable" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectable"]
+visible = false
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_wqgi1")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="PlayerHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("inv_manager", "healthbar_container")]
+script = ExtResource("7_ojxgc")
+inv_manager = NodePath("../InventoryManager")
+healthbar_container = NodePath("HealthBarContainer")
+
+[node name="HealthBarContainer" type="HBoxContainer" parent="PlayerHUD"]
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 135.0
+offset_bottom = 11.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource("8_mt7s2")
+
+[node name="Panel" type="Panel" parent="PlayerHUD/HealthBarContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t5pn0")
+
+[node name="HealthBar" type="ProgressBar" parent="PlayerHUD/HealthBarContainer/Panel"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_m4qir")
+theme_override_styles/fill = SubResource("StyleBoxFlat_do28b")
+value = 60.0
+show_percentage = false
+
+[node name="DamageBar" type="ProgressBar" parent="PlayerHUD/HealthBarContainer/Panel/HealthBar"]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_x06tj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dt3xa")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="PlayerHUD/HealthBarContainer/Panel/HealthBar"]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="Panel2" type="Panel" parent="PlayerHUD/HealthBarContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_c8646")
+
+[node name="EnergyShieldBar" type="ProgressBar" parent="PlayerHUD/HealthBarContainer/Panel2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_4l3qw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xqegf")
+value = 40.0
+show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerHUD"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -25.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerHUD/VBoxContainer"]
+layout_mode = 2
+
+[node name="Ammo" type="Label" parent="PlayerHUD/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+text = "999/999"
+label_settings = SubResource("LabelSettings_88pas")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="timeout" from="PlayerHUD/HealthBarContainer/Panel/HealthBar/Timer" to="PlayerHUD/HealthBarContainer" method="_on_timer_timeout"]

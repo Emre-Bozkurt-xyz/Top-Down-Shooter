@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://t87i7gckfp5p"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_hp8uc"]
+[ext_resource type="PackedScene" uid="uid://c33dug5siani" path="res://Scenes/health_bar.tscn" id="2_he2u7"]
+[ext_resource type="Texture2D" uid="uid://buqpiwh77v7hp" path="res://Assets/Player/AnimationSheet.png" id="2_tcd2o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m8sd"]
+size = Vector2(12, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h6cru"]
+size = Vector2(12, 17)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ls66"]
+radius = 66.0681
+
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("1_hp8uc")
+max_energy_shield = 20.0
+dexterity = 9
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 15.0
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 5.0
+
+[node name="HealthBar" parent="." instance=ExtResource("2_he2u7")]
+offset_left = -12.0
+offset_top = -16.0
+offset_right = 24.0
+offset_bottom = -15.0
+
+[node name="EnvironmentCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_2m8sd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+position = Vector2(0, -7)
+texture = ExtResource("2_tcd2o")
+hframes = 8
+vframes = 6
+frame = 2
+
+[node name="HurtBox" type="StaticBody2D" parent="."]
+position = Vector2(0, -3.5)
+collision_layer = 2
+collision_mask = 0
+
+[node name="Collider" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_h6cru")
+debug_color = Color(0.7, 0.0233334, 0, 0)
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -13)
+
+[node name="DetectionArea" type="Area2D" parent="."]
+position = Vector2(0, -7)
+collision_layer = 8
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_3ls66")
+debug_color = Color(0.245, 0.7, 0, 0)

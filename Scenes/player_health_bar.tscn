@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://c33dug5siani"]
+
+[ext_resource type="Script" path="res://Scripts/player_health_bar.gd" id="1_e38sr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5pn0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m4qir"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_do28b"]
+bg_color = Color(0.395707, 0.666039, 0.547338, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x06tj"]
+bg_color = Color(0.136826, 0.136826, 0.136826, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dt3xa"]
+bg_color = Color(0.960351, 0.960351, 0.960351, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c8646"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4l3qw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqegf"]
+bg_color = Color(0.168627, 0.6, 0.6, 1)
+
+[node name="HBoxContainer" type="HBoxContainer"]
+offset_right = 240.0
+offset_bottom = 4.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource("1_e38sr")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t5pn0")
+
+[node name="HealthBar" type="ProgressBar" parent="Panel"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_m4qir")
+theme_override_styles/fill = SubResource("StyleBoxFlat_do28b")
+value = 60.0
+show_percentage = false
+
+[node name="DamageBar" type="ProgressBar" parent="Panel/HealthBar"]
+unique_name_in_owner = true
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_x06tj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dt3xa")
+value = 80.0
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="Panel/HealthBar"]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_c8646")
+
+[node name="EnergyShieldBar" type="ProgressBar" parent="Panel2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_4l3qw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xqegf")
+value = 40.0
+show_percentage = false
+
+[connection signal="timeout" from="Panel/HealthBar/Timer" to="." method="_on_timer_timeout"]

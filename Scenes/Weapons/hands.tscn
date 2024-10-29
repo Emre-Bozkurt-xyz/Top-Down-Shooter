@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4wiynt1rfvgq"]
+
+[ext_resource type="Script" path="res://Scripts/melee.gd" id="1_x2q24"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7x2h7"]
+
+[node name="Hands" type="Node2D" node_paths=PackedStringArray("attack_range_area")]
+script = ExtResource("1_x2q24")
+attack_range_area = NodePath("AttackRangeArea")
+base_damage = 5.0
+
+[node name="AttackRangeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="RangeArea" type="CollisionShape2D" parent="AttackRangeArea"]
+shape = SubResource("CircleShape2D_7x2h7")
+debug_color = Color(0.988235, 0.6, 0.701961, 0)

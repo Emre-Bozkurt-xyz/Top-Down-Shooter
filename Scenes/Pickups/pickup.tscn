@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqdc3lut2tijo"]
+
+[ext_resource type="Script" path="res://Scripts/pickup.gd" id="1_pyhg3"]
+[ext_resource type="PackedScene" uid="uid://bqemwnsy6dkga" path="res://Scenes/actionable.tscn" id="2_xdgv7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swsbq"]
+size = Vector2(10, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jrygp"]
+radius = 21.0
+
+[node name="Pickup" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_pyhg3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_swsbq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+
+[node name="Actionable" parent="." instance=ExtResource("2_xdgv7")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actionable"]
+shape = SubResource("CircleShape2D_jrygp")
+debug_color = Color(0.815686, 0.886275, 0.933333, 0.0235294)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
