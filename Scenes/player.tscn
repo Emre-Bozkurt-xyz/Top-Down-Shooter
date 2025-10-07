@@ -1,14 +1,16 @@
-[gd_scene load_steps=38 format=3 uid="uid://cy07xwytxk18q"]
+[gd_scene load_steps=32 format=3 uid="uid://cy07xwytxk18q"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_baxxc"]
+[ext_resource type="Script" uid="uid://cndwcuoomk4mf" path="res://Scripts/player.gd" id="1_baxxc"]
 [ext_resource type="Texture2D" uid="uid://buqpiwh77v7hp" path="res://Assets/Player/AnimationSheet.png" id="1_ktcyp"]
-[ext_resource type="Script" path="res://Scripts/InventoryManager.gd" id="2_jxdgr"]
-[ext_resource type="PackedScene" uid="uid://c3hawnpkseav4" path="res://Scenes/Weapons/sniper_thing.tscn" id="3_0hxd8"]
-[ext_resource type="PackedScene" uid="uid://bollejjsex4l5" path="res://Scenes/Weapons/machine_gun_thing.tscn" id="4_dgapk"]
+[ext_resource type="Script" uid="uid://begwgrfoppuld" path="res://Scripts/InventoryManager.gd" id="2_jxdgr"]
+[ext_resource type="PackedScene" uid="uid://bollejjsex4l5" path="res://Scenes/Weapons/machine_gun_thing.tscn" id="4_a556g"]
+[ext_resource type="PackedScene" uid="uid://c3owvv8t57yug" path="res://Scenes/Weapons/sword.tscn" id="5_80d7b"]
 [ext_resource type="PackedScene" uid="uid://d2slkfh2pue4g" path="res://Scenes/Pickups/item_pickup.tscn" id="5_gi6qa"]
+[ext_resource type="PackedScene" uid="uid://c3hawnpkseav4" path="res://Scenes/Weapons/sniper_thing.tscn" id="5_isaim"]
 [ext_resource type="PackedScene" uid="uid://b38xt2ku0bh6b" path="res://Scenes/hurt_box.tscn" id="7_lyj2p"]
-[ext_resource type="Script" path="res://Scripts/PlayerHUD.gd" id="7_ojxgc"]
-[ext_resource type="Script" path="res://Scripts/player_health_bar.gd" id="8_53abp"]
+[ext_resource type="Script" uid="uid://cau4elsw8jrl4" path="res://Scripts/PlayerHUD.gd" id="7_ojxgc"]
+[ext_resource type="PackedScene" uid="uid://c33dug5siani" path="res://Scenes/player_health_bar.tscn" id="10_anuc6"]
+[ext_resource type="FontFile" uid="uid://q7gx8db4fmgh" path="res://Assets/GUI/Minecraft.ttf" id="10_miag4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1xksl"]
 size = Vector2(8, 5)
@@ -280,11 +282,11 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n4gcg"]
 _data = {
-"Idle_left": SubResource("Animation_2h478"),
-"Idle_right": SubResource("Animation_wegdg"),
-"RESET": SubResource("Animation_0pnaa"),
-"Walk_left": SubResource("Animation_lilw7"),
-"Walk_right": SubResource("Animation_l0f5a")
+&"Idle_left": SubResource("Animation_2h478"),
+&"Idle_right": SubResource("Animation_wegdg"),
+&"RESET": SubResource("Animation_0pnaa"),
+&"Walk_left": SubResource("Animation_lilw7"),
+&"Walk_right": SubResource("Animation_l0f5a")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ujrd2"]
@@ -334,32 +336,6 @@ radius = 8.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqgi1"]
 size = Vector2(10, 17)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5pn0"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m4qir"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_do28b"]
-bg_color = Color(0.395707, 0.666039, 0.547338, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x06tj"]
-bg_color = Color(0.136826, 0.136826, 0.136826, 1)
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
-shadow_color = Color(0, 0, 0, 0.27451)
-shadow_offset = Vector2(0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dt3xa"]
-bg_color = Color(0.960351, 0.960351, 0.960351, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c8646"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4l3qw"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqegf"]
-bg_color = Color(0.168627, 0.6, 0.6, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_88pas"]
 font_size = 12
 
@@ -373,12 +349,12 @@ max_energy_shield = 30.0
 
 [node name="InventoryManager" type="Node" parent="." node_paths=PackedStringArray("gun_parent")]
 script = ExtResource("2_jxdgr")
-weapon_slots = Array[PackedScene]([ExtResource("3_0hxd8"), ExtResource("4_dgapk")])
+weapon_slots = Array[PackedScene]([ExtResource("5_80d7b"), ExtResource("4_a556g"), ExtResource("5_isaim")])
 base_pickup_scene = ExtResource("5_gi6qa")
-gun_parent = NodePath("../Pivot/Gun")
+gun_parent = NodePath("../Pivot/Item")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 5
+texture_filter = 1
 texture = ExtResource("1_ktcyp")
 hframes = 8
 vframes = 6
@@ -389,7 +365,7 @@ shape = SubResource("RectangleShape2D_1xksl")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_n4gcg")
+&"": SubResource("AnimationLibrary_n4gcg")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -402,7 +378,7 @@ parameters/Walk/blend_position = -0.00202841
 unique_name_in_owner = true
 position = Vector2(0, 5)
 
-[node name="Gun" type="Node2D" parent="Pivot"]
+[node name="Item" type="Node2D" parent="Pivot"]
 unique_name_in_owner = true
 position = Vector2(8, 0)
 
@@ -412,7 +388,6 @@ position = Vector2(-12, 4)
 
 [node name="ActionableFinder" type="Area2D" parent="."]
 unique_name_in_owner = true
-visible = false
 collision_layer = 16
 collision_mask = 16
 
@@ -437,73 +412,7 @@ position = Vector2(0, 4)
 [node name="PlayerHUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("inv_manager", "healthbar_container")]
 script = ExtResource("7_ojxgc")
 inv_manager = NodePath("../InventoryManager")
-healthbar_container = NodePath("HealthBarContainer")
-
-[node name="HealthBarContainer" type="HBoxContainer" parent="PlayerHUD"]
-offset_left = 8.0
-offset_top = 6.0
-offset_right = 135.0
-offset_bottom = 11.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
-script = ExtResource("8_53abp")
-
-[node name="Panel" type="Panel" parent="PlayerHUD/HealthBarContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 3.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_t5pn0")
-
-[node name="HealthBar" type="ProgressBar" parent="PlayerHUD/HealthBarContainer/Panel"]
-unique_name_in_owner = true
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_m4qir")
-theme_override_styles/fill = SubResource("StyleBoxFlat_do28b")
-value = 60.0
-show_percentage = false
-
-[node name="DamageBar" type="ProgressBar" parent="PlayerHUD/HealthBarContainer/Panel/HealthBar"]
-unique_name_in_owner = true
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_x06tj")
-theme_override_styles/fill = SubResource("StyleBoxFlat_dt3xa")
-value = 80.0
-show_percentage = false
-
-[node name="Timer" type="Timer" parent="PlayerHUD/HealthBarContainer/Panel/HealthBar"]
-unique_name_in_owner = true
-wait_time = 0.5
-one_shot = true
-
-[node name="Panel2" type="Panel" parent="PlayerHUD/HealthBarContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_c8646")
-
-[node name="EnergyShieldBar" type="ProgressBar" parent="PlayerHUD/HealthBarContainer/Panel2"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxEmpty_4l3qw")
-theme_override_styles/fill = SubResource("StyleBoxFlat_xqegf")
-value = 40.0
-show_percentage = false
+healthbar_container = NodePath("HealthbarContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerHUD"]
 anchors_preset = 3
@@ -527,9 +436,10 @@ layout_mode = 2
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
+theme_override_fonts/font = ExtResource("10_miag4")
 text = "999/999"
 label_settings = SubResource("LabelSettings_88pas")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[connection signal="timeout" from="PlayerHUD/HealthBarContainer/Panel/HealthBar/Timer" to="PlayerHUD/HealthBarContainer" method="_on_timer_timeout"]
+[node name="HealthbarContainer" parent="PlayerHUD" instance=ExtResource("10_anuc6")]

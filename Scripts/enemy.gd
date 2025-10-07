@@ -4,6 +4,7 @@ extends Entity
 @export_category("Enemy Stats")
 @export var movement_speed: float = 50
 @export var attack_frequency: float = 1
+
 var attack_tween
 
 @export_category("Attachable Nodes")
@@ -15,6 +16,7 @@ var attack_tween
 
 @export_category("Toggle-ables")
 @export var can_move: bool = true
+@export var can_attack: bool = true
 
 @export var follow_target: Node2D = null
 @export var attack_target: Node2D = null
@@ -48,6 +50,7 @@ func _ready():
 	get_tree().create_tween().bind_node(self).set_loops().tween_callback(update_navigation_target).set_delay(0.3)
 
 func _physics_process(delta):
+	if Global.enemies_paused: return
 	
 	if is_instance_valid(attack_target) and attack_target:
 		pivot.look_at(attack_target.global_position)
@@ -111,7 +114,7 @@ func recharge_eshield():
 
 
 func attack():
-	weapon_slot.get_child(0).attack()
+	if can_attack: weapon_slot.get_child(0).attack()
 
 
 func on_body_detected_attack_area(body: Node2D):
@@ -152,7 +155,3 @@ func set_follow_target(body):
 	for other_body in detection_area.get_overlapping_bodies():
 		if other_body.is_in_group("Enemy"):
 			other_body.follow_target = follow_target
-
-
-
-

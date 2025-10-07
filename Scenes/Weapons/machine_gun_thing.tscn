@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bollejjsex4l5"]
 
-[ext_resource type="Script" path="res://Scripts/gun.gd" id="1_e8518"]
+[ext_resource type="Script" uid="uid://2jmqmvr54edr" path="res://Scripts/gun.gd" id="1_e8518"]
 [ext_resource type="PackedScene" uid="uid://bmifu2u6hcbw8" path="res://Scenes/Bullets/machine_gun_bullet.tscn" id="2_g7lhb"]
 [ext_resource type="Texture2D" uid="uid://csoc52wqimlf5" path="res://Assets/Guns/12.png" id="3_lc36y"]
 
@@ -70,10 +70,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4js5o"]
 _data = {
-"Enter": SubResource("Animation_6t8k2"),
-"Exit": SubResource("Animation_3wjap"),
-"Fire": SubResource("Animation_f0k1d"),
-"RESET": SubResource("Animation_ludfl")
+&"Enter": SubResource("Animation_6t8k2"),
+&"Exit": SubResource("Animation_3wjap"),
+&"Fire": SubResource("Animation_f0k1d"),
+&"RESET": SubResource("Animation_ludfl")
 }
 
 [node name="MachineGunThing" type="Node2D" node_paths=PackedStringArray("barrel_pos")]
@@ -86,11 +86,10 @@ arc = 10.0
 bullet_speed = 6.0
 bullet = ExtResource("2_g7lhb")
 barrel_pos = NodePath("Body/Barrel")
-gun_name = "Machine Gun Thing"
 _rarity = 3
-base_damage = 5.0
+_base_damage = 3.0
 camera_shake_strength = 4.0
-knockback_strength = 2.0
+_knockback = 2
 
 [node name="Body" type="Node2D" parent="."]
 
@@ -106,5 +105,5 @@ position = Vector2(12, -3)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_4js5o")
+&"": SubResource("AnimationLibrary_4js5o")
 }

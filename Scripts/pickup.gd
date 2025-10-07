@@ -11,6 +11,7 @@ func _ready():
 			actionable = child
 			break
 
+
 func on_player_interaction(player):
 	queue_free()
 

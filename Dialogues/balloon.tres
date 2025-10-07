@@ -1,0 +1,74 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://cofqpogmuj0qi"]
+
+[ext_resource type="FontFile" uid="uid://q7gx8db4fmgh" path="res://Assets/GUI/Minecraft.ttf" id="1_8usqa"]
+[ext_resource type="Texture2D" uid="uid://k2jdnkg85md7" path="res://Assets/GUI/GUI.png" id="2_ceu0d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.329412, 0.329412, 0.329412, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_s8is1"]
+texture = ExtResource("2_ceu0d")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(113, 81, 30, 14)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fo6xn"]
+texture = ExtResource("2_ceu0d")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(113, 113, 30, 14)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jkf7t"]
+texture = ExtResource("2_ceu0d")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 5.0
+region_rect = Rect2(113, 81, 30, 14)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_213r3"]
+texture = ExtResource("2_ceu0d")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(113, 98, 30, 13)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jmmmb"]
+texture = ExtResource("2_ceu0d")
+texture_margin_left = 14.0
+texture_margin_top = 13.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
+region_rect = Rect2(2, 34, 44, 44)
+
+[resource]
+default_font_size = 20
+Button/font_sizes/font_size = 4
+Button/fonts/font = ExtResource("1_8usqa")
+Button/styles/disabled = SubResource("StyleBoxFlat_spyqn")
+Button/styles/focus = SubResource("StyleBoxTexture_s8is1")
+Button/styles/hover = SubResource("StyleBoxTexture_fo6xn")
+Button/styles/normal = SubResource("StyleBoxTexture_jkf7t")
+Button/styles/pressed = SubResource("StyleBoxTexture_213r3")
+MarginContainer/constants/margin_bottom = 15
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 15
+Panel/styles/panel = SubResource("StyleBoxTexture_jmmmb")
+RichTextLabel/font_sizes/normal_font_size = 4
+RichTextLabel/fonts/bold_font = ExtResource("1_8usqa")
+RichTextLabel/fonts/normal_font = ExtResource("1_8usqa")

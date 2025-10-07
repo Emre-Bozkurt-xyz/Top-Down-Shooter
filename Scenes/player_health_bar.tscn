@@ -1,57 +1,75 @@
-[gd_scene load_steps=10 format=3 uid="uid://c33dug5siani"]
+[gd_scene load_steps=11 format=3 uid="uid://c33dug5siani"]
 
-[ext_resource type="Script" path="res://Scripts/player_health_bar.gd" id="1_e38sr"]
+[ext_resource type="Script" uid="uid://cw8kg62w860cx" path="res://Scripts/player_health_bar.gd" id="1_e38sr"]
+[ext_resource type="Texture2D" uid="uid://k2jdnkg85md7" path="res://Assets/GUI/GUI.png" id="2_mhob1"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t5pn0"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8b3u5"]
+texture = ExtResource("2_mhob1")
+texture_margin_left = 1.0
+texture_margin_right = 5.0
+region_rect = Rect2(135, 20, 52, 7)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m4qir"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_do28b"]
-bg_color = Color(0.395707, 0.666039, 0.547338, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_72e2q"]
+texture = ExtResource("2_mhob1")
+texture_margin_right = 3.0
+region_rect = Rect2(72, 22, 49, 3)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x06tj"]
-bg_color = Color(0.136826, 0.136826, 0.136826, 1)
-expand_margin_left = 1.0
-expand_margin_top = 1.0
-expand_margin_right = 1.0
-expand_margin_bottom = 1.0
-shadow_color = Color(0, 0, 0, 0.27451)
-shadow_offset = Vector2(0, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d4aq5"]
+region_rect = Rect2(0, 0, 192, 304)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dt3xa"]
-bg_color = Color(0.960351, 0.960351, 0.960351, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ste63"]
+texture = ExtResource("2_mhob1")
+texture_margin_right = 3.0
+region_rect = Rect2(6, 22, 49, 3)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c8646"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v713f"]
+texture = ExtResource("2_mhob1")
+texture_margin_left = 1.0
+texture_margin_right = 5.0
+region_rect = Rect2(135, 20, 52, 7)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4l3qw"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqegf"]
-bg_color = Color(0.168627, 0.6, 0.6, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1dm83"]
+texture = ExtResource("2_mhob1")
+texture_margin_right = 3.0
+region_rect = Rect2(72, 6, 42, 3)
 
 [node name="HBoxContainer" type="HBoxContainer"]
-offset_right = 240.0
-offset_bottom = 4.0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 186.0
+offset_bottom = 10.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource("1_e38sr")
 
 [node name="Panel" type="Panel" parent="."]
+texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_t5pn0")
+theme_override_styles/panel = SubResource("StyleBoxTexture_8b3u5")
 
 [node name="HealthBar" type="ProgressBar" parent="Panel"]
 unique_name_in_owner = true
 z_index = 1
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(0, 3)
 theme_override_styles/background = SubResource("StyleBoxEmpty_m4qir")
-theme_override_styles/fill = SubResource("StyleBoxFlat_do28b")
+theme_override_styles/fill = SubResource("StyleBoxTexture_72e2q")
 value = 60.0
 show_percentage = false
 
@@ -64,8 +82,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_x06tj")
-theme_override_styles/fill = SubResource("StyleBoxFlat_dt3xa")
+theme_override_styles/background = SubResource("StyleBoxTexture_d4aq5")
+theme_override_styles/fill = SubResource("StyleBoxTexture_ste63")
 value = 80.0
 show_percentage = false
 
@@ -75,20 +93,25 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Panel2" type="Panel" parent="."]
+texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_c8646")
+theme_override_styles/panel = SubResource("StyleBoxTexture_v713f")
 
 [node name="EnergyShieldBar" type="ProgressBar" parent="Panel2"]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 1.0
+offset_top = -1.5
+offset_right = 43.0
+offset_bottom = 1.5
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_4l3qw")
-theme_override_styles/fill = SubResource("StyleBoxFlat_xqegf")
+theme_override_styles/fill = SubResource("StyleBoxTexture_1dm83")
 value = 40.0
 show_percentage = false
 

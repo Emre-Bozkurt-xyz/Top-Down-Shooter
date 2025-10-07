@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1ud5gff3ii1o"]
+
+[ext_resource type="Script" uid="uid://dn4r5n51fkquq" path="res://Scripts/enemy.gd" id="1_44rj4"]
+[ext_resource type="PackedScene" uid="uid://cnc1va72c1yi" path="res://Scenes/health_bar_alternative.tscn" id="2_dxpri"]
+[ext_resource type="PackedScene" uid="uid://bollejjsex4l5" path="res://Scenes/Weapons/machine_gun_thing.tscn" id="2_vt3sf"]
+[ext_resource type="Texture2D" uid="uid://buqpiwh77v7hp" path="res://Assets/Player/AnimationSheet.png" id="3_b2myr"]
+[ext_resource type="PackedScene" uid="uid://b38xt2ku0bh6b" path="res://Scenes/hurt_box.tscn" id="5_aq36o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2m8sd"]
+size = Vector2(12, 5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2tbq6"]
+radius = 73.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c2j4h"]
+radius = 59.0
+
+[node name="TutRangedEnemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "health_bar", "damage_numbers_origin", "detection_area", "attack_area") groups=["Enemy"]]
+collision_layer = 8
+collision_mask = 9
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_44rj4")
+attack_frequency = 3.0
+navigation_agent = NodePath("NavigationAgent2D")
+health_bar = NodePath("HBoxContainer")
+damage_numbers_origin = NodePath("DamageNumbersOrigin")
+detection_area = NodePath("DetectionArea")
+attack_area = NodePath("AttackArea")
+max_health = 20.0
+max_energy_shield = 20.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 15.0
+target_desired_distance = 35.0
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 5.0
+
+[node name="HBoxContainer" parent="." instance=ExtResource("2_dxpri")]
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = -12.0
+
+[node name="EnvironmentCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_2m8sd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.86599, 0.172441, 0.75641, 1)
+texture_filter = 1
+position = Vector2(0, -7)
+texture = ExtResource("3_b2myr")
+hframes = 8
+vframes = 6
+frame = 2
+
+[node name="DamageNumbersOrigin" type="Node2D" parent="."]
+position = Vector2(0, -13)
+
+[node name="Pivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -3)
+
+[node name="Weapon" type="Node2D" parent="Pivot"]
+unique_name_in_owner = true
+position = Vector2(8, 0)
+
+[node name="MachineGunThing" parent="Pivot/Weapon" instance=ExtResource("2_vt3sf")]
+
+[node name="HurtBox" parent="." instance=ExtResource("5_aq36o")]
+
+[node name="DetectionArea" type="Area2D" parent="."]
+position = Vector2(0, -7)
+collision_layer = 0
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(0, 7)
+shape = SubResource("CircleShape2D_2tbq6")
+debug_color = Color(0.245, 0.7, 0, 0)
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_c2j4h")
+debug_color = Color(0.980392, 0.117647, 0.223529, 0.0666667)

@@ -13,4 +13,4 @@ func on_player_interaction(player):
 			2: held_item.set(property_to_modify, held_item.get(property_to_modify) - value)
 			3: held_item.set(property_to_modify, held_item.get(property_to_modify) * value)
 	
-	super(player)
+		super(player)

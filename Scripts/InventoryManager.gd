@@ -28,7 +28,7 @@ func _ready():
 	call_deferred("equip", 0)
 
 func equip(id):
-	if gun_parent.get_child(0):
+	if gun_parent.get_children() and gun_parent.get_child(0):
 		current_item.exit()
 		
 		# Must make this better soon lol
@@ -43,7 +43,9 @@ func equip(id):
 		current_item = item_stack[id]
 		item_switched.emit(current_item)
 		
-		current_item.ammo_changed.connect(func(): item_state_changed.emit())
+		if current_item is Gun:
+			current_item.ammo_changed.connect(func(): item_state_changed.emit())
+			
 		current_item.weapon_owner = inventory_owner
 		current_item.enter()
 
@@ -67,13 +69,10 @@ func _unhandled_input(event):
 func drop(item):
 	
 	if item_stack.size() > 0:
-		var pickup_scene := base_pickup_scene.instantiate()
+		var pickup_scene : ItemPickup = base_pickup_scene.instantiate()
 		
-		pickup_scene.set_texture(current_item.get_texture())
-		pickup_scene.resize_sprite(0.4)
-		pickup_scene.item = current_item
+		pickup_scene.set_item(current_item, 0.4)
 		pickup_scene.global_position = %DropPosition.global_position
-		pickup_scene.apply_rarity(current_item.rarity)
 		
 		# Need to add a target that takes the position of the mouse pos
 		# for the player script to integrate this inventory manager with enemies.

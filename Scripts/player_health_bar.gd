@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 @onready var timer := %Timer
 @onready var damage_bar := %DamageBar

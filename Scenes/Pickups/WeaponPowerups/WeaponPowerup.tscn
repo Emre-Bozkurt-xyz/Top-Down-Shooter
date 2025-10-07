@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bqdc3lut2tijo" path="res://Scenes/Pickups/pickup.tscn" id="1_cbq0q"]
 [ext_resource type="Texture2D" uid="uid://cobqiqkiueomf" path="res://Assets/Guns/Bullets/All_Fire_Bullet_Pixel_16x16_02.png" id="2_2j8wl"]
-[ext_resource type="Script" path="res://Scenes/Pickups/WeaponPowerups/WeaponPowerup.gd" id="2_mi7ta"]
+[ext_resource type="Script" uid="uid://cvpm1pvmfner6" path="res://Scenes/Pickups/WeaponPowerups/WeaponPowerup.gd" id="2_mi7ta"]
 
 [sub_resource type="Animation" id="Animation_v2ca4"]
 length = 0.001
@@ -38,8 +38,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vr3jg"]
 _data = {
-"RESET": SubResource("Animation_v2ca4"),
-"default": SubResource("Animation_hyi8o")
+&"RESET": SubResource("Animation_v2ca4"),
+&"default": SubResource("Animation_hyi8o")
 }
 
 [node name="WeaponPowerup" instance=ExtResource("1_cbq0q")]

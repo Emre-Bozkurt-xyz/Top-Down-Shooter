@@ -28,13 +28,10 @@ func on_player_interaction(player):
 	actionable.monitorable = false
 	actionable.monitoring = false
 	
-	var pickup_scene := base_pickup_scene.instantiate()
+	var pickup_scene: ItemPickup = base_pickup_scene.instantiate()
 	var item := item_to_drop.instantiate()
-	pickup_scene.set_texture(item.get_texture())
-	pickup_scene.resize_sprite(0.45)
-	pickup_scene.item = item
+	pickup_scene.set_item(item, 0.45)
 	pickup_scene.global_position = global_position
-	pickup_scene.apply_rarity(item.rarity)
 	
 	get_tree().create_tween().tween_property(pickup_scene, "global_position:y", -5, 0.2).as_relative().set_ease(Tween.EASE_IN)
 	

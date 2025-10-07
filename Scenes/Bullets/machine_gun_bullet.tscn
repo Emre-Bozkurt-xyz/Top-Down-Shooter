@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bmifu2u6hcbw8"]
 
-[ext_resource type="Script" path="res://Scripts/bullet_rework.gd" id="1_o4k6y"]
+[ext_resource type="Script" uid="uid://dhut0i5r6hwrb" path="res://Scripts/bullet_rework.gd" id="1_o4k6y"]
 [ext_resource type="PackedScene" uid="uid://cm3qj8rnmobj4" path="res://Scenes/Bullets/bullet_impact_particle.tscn" id="2_0au1r"]
 [ext_resource type="Texture2D" uid="uid://cftg8uoiyhvsi" path="res://Assets/Guns/Bullets/All_Fire_Bullet_Pixel_16x16_04.png" id="3_et6o2"]
 
@@ -41,8 +41,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dg2dp"]
 _data = {
-"RESET": SubResource("Animation_5gt7d"),
-"default": SubResource("Animation_vq6yd")
+&"RESET": SubResource("Animation_5gt7d"),
+&"default": SubResource("Animation_vq6yd")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sjmg5"]
@@ -69,7 +69,7 @@ shape = SubResource("RectangleShape2D_ukjbt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_dg2dp")
+&"": SubResource("AnimationLibrary_dg2dp")
 }
 autoplay = "default"
 speed_scale = 3.0

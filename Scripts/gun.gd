@@ -67,20 +67,6 @@ func exit():
 	state = READY
 
 
-func _physics_process(delta):
-	
-	if weapon_owner is Player:
-		if get_global_mouse_position().x > weapon_owner.global_position.x:
-			scale = Vector2(scale.x, abs(scale.y))
-		else:
-			scale = Vector2(scale.x, -abs(scale.y))
-	elif is_instance_valid(look_at_target) and look_at_target:
-		if look_at_target.global_position.x > weapon_owner.global_position.x:
-			scale = Vector2(scale.x, abs(scale.y))
-		else:
-			scale = Vector2(scale.x, -abs(scale.y))
-
-
 func attack():
 	if state == READY:
 		state = FIRING
@@ -116,7 +102,7 @@ func shoot_bullets(shots):
 		# Multi-bullet per shot handling
 		for j in number_of_bullets:
 			var new_bullet = bullet.instantiate()
-			new_bullet.initialize(bullet_speed, decay_value, base_damage, weapon_owner, knockback_strength, bullet_penetration)
+			new_bullet.initialize(bullet_speed, decay_value, base_damage.value, weapon_owner, knockback.value, bullet_penetration)
 			
 			if bullet_decay == BULLET_DECAY_TYPE.RANGE:
 				new_bullet.decay_type = "Range" 

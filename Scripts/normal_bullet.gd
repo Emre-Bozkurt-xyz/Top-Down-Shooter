@@ -49,8 +49,6 @@ func _physics_process(delta):
 			collider.get_hurt(damage, damage_dealer, knockback_strength, direction)
 		elif !collider.get_groups().is_empty() and collider.get_groups()[0] == "Environment":
 			print("wall")
-		else:
-			return
 		
 		if impact_particle_emitter_scene:
 			impact_particle_emitter.emitting = true

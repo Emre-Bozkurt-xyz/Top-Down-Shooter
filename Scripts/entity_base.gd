@@ -1,9 +1,14 @@
 class_name Entity
 extends CharacterBody2D
 
+signal died
+
 @export var max_health: float = 100:
 	set(value):
 		max_health = max(0, value)
+		
+		if health > max_health:
+			health = max_health
 		
 		# Updates the 'pure' recharge amount
 		health_regen_amount = max_health * health_regen_percent
@@ -165,4 +170,5 @@ func initialize():
 
 
 func die():
+	died.emit()
 	queue_free()

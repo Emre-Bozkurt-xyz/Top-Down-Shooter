@@ -1,29 +1,28 @@
-[gd_scene load_steps=9 format=3 uid="uid://t87i7gckfp5p"]
+[gd_scene load_steps=8 format=3 uid="uid://t87i7gckfp5p"]
 
-[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_hp8uc"]
-[ext_resource type="PackedScene" uid="uid://cnc1va72c1yi" path="res://Scenes/health_bar_alternative.tscn" id="2_2yo4r"]
-[ext_resource type="Texture2D" uid="uid://buqpiwh77v7hp" path="res://Assets/Player/AnimationSheet.png" id="2_tcd2o"]
-[ext_resource type="PackedScene" uid="uid://c4wiynt1rfvgq" path="res://Scenes/Weapons/hands.tscn" id="4_3m6yu"]
-[ext_resource type="PackedScene" uid="uid://b38xt2ku0bh6b" path="res://Scenes/hurt_box.tscn" id="5_5tiwe"]
+[ext_resource type="Script" uid="uid://dn4r5n51fkquq" path="res://Scripts/enemy.gd" id="1_85dna"]
+[ext_resource type="PackedScene" uid="uid://cnc1va72c1yi" path="res://Scenes/health_bar_alternative.tscn" id="2_lhjw2"]
+[ext_resource type="Texture2D" uid="uid://buqpiwh77v7hp" path="res://Assets/Player/AnimationSheet.png" id="3_21pin"]
+[ext_resource type="PackedScene" uid="uid://b38xt2ku0bh6b" path="res://Scenes/hurt_box.tscn" id="4_ao0jd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2m8sd"]
 size = Vector2(12, 5)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3ls66"]
-radius = 61.0082
+[sub_resource type="CircleShape2D" id="CircleShape2D_fr3or"]
+radius = 57.0351
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sxfak"]
-radius = 21.0238
+[sub_resource type="CircleShape2D" id="CircleShape2D_yv41o"]
+radius = 20.025
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent", "health_bar", "damage_numbers_origin", "detection_area", "attack_area") groups=["Enemy"]]
 collision_layer = 8
 collision_mask = 9
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_hp8uc")
+script = ExtResource("1_85dna")
 attack_frequency = 3.0
 navigation_agent = NodePath("NavigationAgent2D")
-health_bar = NodePath("HealthBar")
+health_bar = NodePath("HBoxContainer")
 damage_numbers_origin = NodePath("DamageNumbersOrigin")
 detection_area = NodePath("DetectionArea")
 attack_area = NodePath("AttackArea")
@@ -35,11 +34,11 @@ path_postprocessing = 1
 avoidance_enabled = true
 radius = 5.0
 
-[node name="HealthBar" parent="." instance=ExtResource("2_2yo4r")]
-offset_left = -11.0
+[node name="HBoxContainer" parent="." instance=ExtResource("2_lhjw2")]
+offset_left = -15.0
 offset_top = -15.0
-offset_right = 12.0
-offset_bottom = -14.0
+offset_right = 15.0
+offset_bottom = -12.0
 
 [node name="EnvironmentCollider" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.5)
@@ -49,7 +48,7 @@ shape = SubResource("RectangleShape2D_2m8sd")
 modulate = Color(1, 0, 0, 1)
 texture_filter = 1
 position = Vector2(0, -7)
-texture = ExtResource("2_tcd2o")
+texture = ExtResource("3_21pin")
 hframes = 8
 vframes = 6
 frame = 2
@@ -65,9 +64,7 @@ position = Vector2(0, -3)
 unique_name_in_owner = true
 position = Vector2(8, 0)
 
-[node name="Hands" parent="Pivot/Weapon" instance=ExtResource("4_3m6yu")]
-
-[node name="HurtBox" parent="." instance=ExtResource("5_5tiwe")]
+[node name="HurtBox" parent="." instance=ExtResource("4_ao0jd")]
 
 [node name="DetectionArea" type="Area2D" parent="."]
 position = Vector2(0, -7)
@@ -76,7 +73,7 @@ collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 position = Vector2(0, 7)
-shape = SubResource("CircleShape2D_3ls66")
+shape = SubResource("CircleShape2D_fr3or")
 debug_color = Color(0.245, 0.7, 0, 0)
 
 [node name="AttackArea" type="Area2D" parent="."]
@@ -84,5 +81,5 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-shape = SubResource("CircleShape2D_sxfak")
+shape = SubResource("CircleShape2D_yv41o")
 debug_color = Color(0.980392, 0.117647, 0.223529, 0.0666667)

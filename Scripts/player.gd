@@ -16,7 +16,7 @@ signal energy_shield_changed(current_energy_shield)
 @onready var anim_state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
 @onready var pivot = %Pivot
-@onready var gun_holder := %Gun
+@onready var item_holder := %Item
 
 enum LOOK_DIRECTION {
 	RIGHT = 1,
@@ -26,7 +26,6 @@ enum LOOK_DIRECTION {
 var look_direction = LOOK_DIRECTION.RIGHT
 
 func _ready():
-	
 	super()
 	update_animation_parameters(Vector2(starting_direction, 0))
 
@@ -49,7 +48,11 @@ func regenerate_health():
 
 
 func _physics_process(delta):
+	
 	move(delta)
+	
+	# Global parameter to turn off in-world player inputs and actions
+	if not Global.can_player_action: return
 	
 	pivot.look_at(get_global_mouse_position())
 	
@@ -59,12 +62,12 @@ func _physics_process(delta):
 		look_direction = LOOK_DIRECTION.LEFT
 	
 	if Input.is_action_pressed("fire"):
-		if gun_holder.get_child(0):
-			gun_holder.get_child(0).attack()
+		if item_holder.get_child(0):
+			item_holder.get_child(0).attack()
 	
 	if Input.is_action_pressed("reload"):
-		if gun_holder.get_child(0):
-			gun_holder.get_child(0).reload()
+		if item_holder.get_child(0):
+			item_holder.get_child(0).reload()
 	
 	if Input.is_action_just_pressed("interact"):
 		# It is important that actionables are in their own designated layer for this to work
@@ -95,6 +98,11 @@ func get_input_axis():
 
 
 func move(_delta):
+	if not Global.can_player_move:
+		velocity = Vector2.ZERO
+		pick_new_state()
+		return
+	
 	axis = get_input_axis()
 	
 	velocity = axis * move_speed

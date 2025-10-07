@@ -12,6 +12,7 @@ func display_number(value: float, position: Vector2, is_critical: bool = false):
 	if value == 0:
 		color = "FFF8"
 	
+	number.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	number.label_settings.font_color = color
 	number.label_settings.font_size = 6
 	number.label_settings.outline_color = "#000"

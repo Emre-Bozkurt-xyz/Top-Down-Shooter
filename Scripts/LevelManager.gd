@@ -3,15 +3,34 @@ extends Node
 
 # Purpose: to handle hardware changes of cursor
 
+@export var dialogue_resource: Resource = null
+@export var dialogue_title: String = "start"
+
 var game_cursor = preload("res://Assets/Crosshairs/in_game.png")
 
 var tween: Tween
 
 func _ready():
 	Global.current_level_manager = self
-	
-	take_aim()
+	Global.interaction_began.connect(on_interaction_began)
+	Global.interaction_completed.connect(on_interaction_completed)
+	call_deferred("beginDialogue", dialogue_resource, dialogue_title)
 
+func beginDialogue(resource: Resource, title: String):
+	DialogueManager.show_dialogue_balloon_scene("res://Dialogues/example_balloon.tscn", resource, title)
+
+func on_interaction_began(args: Array):
+	Input.set_custom_mouse_cursor(null)
+	Global.can_player_action = false
+	Global.can_player_move = false
+	Global.enemies_paused = true
+
+func on_interaction_completed(args: Array):
+	take_aim()
+	await get_tree().create_timer(0.1).timeout
+	Global.can_player_action = true
+	Global.can_player_move = true
+	Global.enemies_paused = false
 
 func reload():
 	

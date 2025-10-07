@@ -1,0 +1,21 @@
+~ start
+do signal_interaction_began()
+Tutorial: Adventurer, you are in a simulated dungeon where all trainees first start.
+Tutorial: Complete the dungeon to prove your worth.
+do signal_interaction_completed()
+=> END
+
+~ still_enemy
+do signal_interaction_began()
+Tutorial: There is an enemy in front of you, attack it.
+Tutorial: Don't worry, this one can't move.
+do signal_interaction_completed()
+=> END
+
+~ still_enemy_killed
+do signal_interaction_began()
+Tutorial: Well done.
+Tutorial: Next, there lies a group of enemies ahead.
+Tutorial: Take the weapon in front of you, you will need it.
+do signal_interaction_completed()
+=> END

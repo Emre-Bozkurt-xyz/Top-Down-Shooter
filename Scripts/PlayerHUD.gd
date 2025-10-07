@@ -17,7 +17,7 @@ func _ready():
 	player.energy_shield_changed.connect(func(value): healthbar_container.set_energy_shield(value))
 	
 	call_deferred("initialize_healthbar")
-
+ 
 
 func initialize_healthbar():
 	healthbar_container.init_health(player.health, player.current_energy_shield)
@@ -26,7 +26,11 @@ func initialize_healthbar():
 func initialize_item(item):
 	current_item = item
 	
-	ammo_label.text = str(item.current_ammo) + " / " + str(item.maximum_ammo)
+	if current_item is Gun:
+		ammo_label.text = str(item.current_ammo) + " / " + str(item.maximum_ammo)
+	else:
+		ammo_label.text = "- / -"
 
 func update_item():
-	ammo_label.text = str(current_item.current_ammo) + " / " + str(current_item.maximum_ammo)
+	if current_item is Gun:
+		ammo_label.text = str(current_item.current_ammo) + " / " + str(current_item.maximum_ammo)
